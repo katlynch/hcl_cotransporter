@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+\setlength{\topmargin}{-0.35in}
+\setlength{\textheight}{9.in}
+\setlength{\evensidemargin}{-.2in}
+\setlength{\oddsidemargin}{-.2in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+%\headheight = 0.0 in
+%\headsep = 0.0 in
+%\parskip = 0.2in
+%\parindent = 0.0in
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\ena{\end{eqnarray}}
+\def\psize{3.5in}
+\def\se{\sigma_e}
+\def\si{\sigma_i}
+\def\figsize{2.5in}
+\def\sig{$\sigma^{28}$}
+\def\chem#1#2{ {
+{\scriptscriptstyle#1\atop\longrightarrow}\atop
+{\longleftarrow\atop \scriptscriptstyle#2}} }
+
+\title{Notes on HCl Transport}
+\author{J. P.  Keener\\Department of Mathematics\\University of Utah}
+\begin{document}
+\maketitle
+
+
+The notation is $S_{x_1,x_2,x_3,x_4,x_5,x_6}$ where $x_j$ = 0, 1.  Thus, there are $2^6 =64$ states (although not all are allowed).  A possible  binary representation is $\sigma_p$ where 
+\beq
+p = \sum_{j=1}^6 x_j 2^{6-j}.
+\eeq
+The states are
+\bea
+x_1&=\left\{ \begin{array}{cc} 1,  {\rm E148~up},\\0, {\rm E148~down} \end{array}\right.\\
+x_2&= \left\{ \begin{array}{cc} 1,  {\rm E148~protonated },\\0, {\rm E148~deprotonated} \end{array}\right.\\
+x_3&=\left\{ \begin{array}{cc} 1,  {\rm E203~protonated },\\0, {\rm E203~deprotonated} \end{array}\right.\\
+x_{4,5,6} &=\left\{ \begin{array}{cc} 1,  {\rm Cl~bound},\\0, {\rm Cl~unbound} \end{array}\right..
+\ena
+
+However, some states are not permitted.
+\begin{enumerate}
+\item E148 down and $S_{cen}$ occupied is not allowed.   Thus, the states $S_{0,x_2,x_3,x_4,1,x_6}$  are not allowed.  \item Only one proton can be bound at a time, not two.  Thus, the states $S_{x_1,1,1,x_4,x_5,x_6}$ are not allowed.
+
+So, there are only 36 allowed states.
+A possible enumeration of these 36 states is 
+\beq
+\sigma  = 12(2x_2+x_3)+4(x_1+x_5)+2x_4+x_6+1,
+\eeq
+with the requirement that $x_1=0$ and $x_5=1$ is not allowed and $x_2=x_3=1$ is not allowed.
+ \end{enumerate}
+
+ 
+
+Some transitions are restricted.
+\begin{enumerate}
+\item  E148 must be protonated to allow for transfer between Scen and Sout.    This means the transition between $S_{x_1,0,x_3,1,0,x_6}$ and $S_{x_1,0,x_3,0,1,x_6}$ is not permitted. These are $7\leftrightarrow 9$, $8\leftrightarrow 10$, $19\leftrightarrow 21$, $20\leftrightarrow 22$.
+
+ \item
+The proton  transfer $S_{1,1,0,0,0,x_1}$ to  $S_{1,0,1,0,0,x_1} $ is not permitted.  This  is the transition  $29\rightarrow 17$,   and $30\rightarrow 18$.
+\item
+The proton transfer $S_{1,0,1,x_4,0,x_6}$ to $S_{1,1,0,x_4,0,x_6}$ is not permitted .  These are $17\rightarrow 29 $, $18\rightarrow 30$, $19\rightarrow 31$, $20\rightarrow 32$.
+
+\item  The proton transfer $S_{1,0,1,1,x_5,x_6}$ to $S_{1,1,0,1,x_5,x_6}$ is not permitted.   These are  $19\rightarrow 31$, $20\rightarrow 32$, $23\rightarrow 35$, $24\rightarrow 36$. \end{enumerate}
+
+
+Remark:  The code has a reaction from a state that is not permitted.
+
+There are 12 states that are never used.  These are
+
+  100001      100101        1001        1101      101000      101001      101100      101101      101011      101111      110001      110101
+\end{document}
