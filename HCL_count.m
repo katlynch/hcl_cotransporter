@@ -1,4 +1,5 @@
-% calculate HCl states
+% calculate HCl antiporter states
+
 global   pw10 discC
 pw = [5,4,3,2,1,0];
 pw10=[10^5,10^4,10^3,10^2,10,1];
