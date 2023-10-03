@@ -1,5 +1,6 @@
-% calculate HCl antiporter states
+%% calculate HCl antiporter states
 
+%% (1) set up
 global   pw10 discC
 pw = [5,4,3,2,1,0];
 pw10=[10^5,10^4,10^3,10^2,10,1];
@@ -17,6 +18,7 @@ clear npj
 
 np=0;
 
+%% (1.1) check for not permitted states / transitions
 %    'transitions not permitted'
 for j1=0:1
     for j2=0:1
@@ -147,6 +149,7 @@ end
   np
 % 
 
+%% (1.1) Enter Data
 
 % now enter the data  
 % these are the reactions in the current code
@@ -504,8 +507,9 @@ missprod
 njmissp
 
  
+%% (2) Markov Chain
 
-% % now populate the transition matrix
+% populate the transition matrix
 clear Amat B C
 Amat=zeros(36,36);
 length(X)
@@ -547,6 +551,7 @@ end
 figure(1)
 graphplot(mc)
 
+% find indexing / binary rep. of isolated states
 codebreak(incldrows(20))
 codebreak(incldrows(6))
 incldrows(20)
@@ -564,7 +569,12 @@ C*p1
 
 figure(2)
 semilogy(p1,'*')
+
+
+%% Functions
+
  function gv=getv(V)
+ % 
 xt=V;
 for j = 1:6
     gv(j) = fix(xt/(10^(6-j)));
@@ -573,13 +583,13 @@ end
  end
      
 function ndx = getindex(x)
- 
+ % find integer index given binary representation of state
 ndx=12*(2*x(2)+x(3))+4*(x(1)+x(5))+2*x(4)+x(6)+1; 
 
+% set index of unused states to 0
 if(x(1)==0&x(5)==1)
     ndx = 0;
 end
-
 if(x(2)==1&x(3)==1)
     ndx = 0;
 end
@@ -594,6 +604,7 @@ xn=sum(x.*pw10);
 end
 
 function xout = codebreak(ndx)
+% return binary representation given state index
 clear x
 
 for j1=0:1
@@ -620,7 +631,9 @@ for j1=0:1
 end
 end
 
+
 function p1 = iterateC(p0,n)
+% discrete Euler simulations
 global discC
 for j = 1:n
     p1=discC*p0;
