@@ -18,6 +18,8 @@ clear npj
 np=0;
 
 %    'transitions not permitted'
+clear x
+clear y
 for j1=0:1
     for j2=0:1
         for j3 =0:1
@@ -43,6 +45,7 @@ ny = getindex(y);
               npj(np,1) = nx;
              Xnp(np,1) = getxn(x);
               npj(np,2)=ny;
+              
               Xnp(np,2) = getxn(y);
  end
         end    
@@ -219,7 +222,7 @@ X=[110000;
    010100;
    101110;
    110110];
-
+   
 Y=[100000;
     100010;
     100100;
@@ -289,8 +292,8 @@ Y=[100000;
     001100;
     110110;
     101110];
- 
-XY=[X,Y]
+     
+XY=[X,Y];
 
 for j = 1:length(X)
  
@@ -345,17 +348,21 @@ cl1p10=211;
 cl0m10=560000;
 cl1m10=350000;
 cl001m=980000;
-cl101m=1900000;
+%cl101m=1900000;
+cl101m=190000;
 cl0p11=179;
 cl1p11=210;
 cl0m11=580000;
 cl1m11=290000;
 cl011p=77;
 cl111p=80;
-cl011m=1100000;
-cl111m=2000000;
+%cl011m=1100000;
+cl011m=110000;
+%cl111m=2000000;
+cl111m=200000;
 cl00pm=680000;
-cl10pm=1000000;
+%cl10pm=1000000;
+cl10pm=100000;
 cl00mp=10000;
 cl10mp=22000;
 cl1pm0=730;
@@ -384,12 +391,14 @@ hpm01=640000;
 hmp01=.77;
 hpm10=790;
 hmp10=.000088;
-hpm11=2200000;
+%hpm11=2200000;
+hpm11=220000;
 hmp11=.23;
 u10=18;
 d10=2500000;
 u00=49;
-d00=490000000;
+%d00=490000000;
+d00=490000;
 u11=16777216;
 
 % put these into the right position:
@@ -462,6 +471,7 @@ hpm10;
 hmp10;
 hpm11;
 hmp11];
+ 
 
 rX
 
@@ -588,7 +598,7 @@ end
 
 function xn = getxn(x)
 global pw10
-
+ 
 xn=sum(x.*pw10);
 
 end
