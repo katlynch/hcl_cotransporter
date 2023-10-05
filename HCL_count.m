@@ -16,12 +16,15 @@ np=0;  % not permitted counter
 clear Xnp
 clear npj
 
-np=0;
+clear x
+clear y
 
 %% (1.1) check for not permitted states / transitions
 %    'transitions not permitted'
-clear x
-clear y
+
+np=0;   % tracks number of not permitted transitions
+
+% checks for E148 unprotonated, Scent to Sin transfer
 for j1=0:1
     for j2=0:1
         for j3 =0:1
@@ -57,6 +60,7 @@ end
 
 np
 %    'reactions not permitted'
+% up E148 to E203 transfer with Sout, Scen unoccupied
 for j1=0:1
                 x(1) = 1;
                 y(1) = 1;
