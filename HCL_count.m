@@ -19,7 +19,7 @@ clear npj
 clear x
 clear y
 
-%% (1.1) check for not permitted states / transitions
+%% (1.1) check for not permitted  transitions
 %    'transitions not permitted'
 
 np=0;   % tracks number of not permitted transitions
@@ -330,6 +330,7 @@ for j=1:np  % number of not permitted reactions
 end
 notperm
 
+stop
  
 % now to get the reaction rates
 cl0m00=520000;
@@ -548,41 +549,7 @@ end
 
  % check for reducibility
 
- sc = max(Cd)+10000;
- discC= diag(ones(nmr,1)) +C/sc;
- size(discC);
- mc = dtmc(discC);
- isreducible(mc)
-% 
-%  C(nmr,:)=ones(1,nmr);
-% RHS = zeros(nmr,1);
-% RHS(nmr) = 1;
-% 
-% 
-%  [L,U] = lu(C)
-
-
-figure(1)
-graphplot(mc)
-
-% find indexing / binary rep. of isolated states
-codebreak(incldrows(20))
-codebreak(incldrows(6))
-incldrows(20)
-incldrows(6)
-p0=zeros(24,1);
-p0(1) = 1;
-
-p1=iterateC(p0,50000000)
-
-% check for convergence
-C*p1
-
-% now find the flux
-% next...
-
-figure(2)
-semilogy(p1,'*')
+ 
 
 
 %% Functions
@@ -642,15 +609,5 @@ for j1=0:1
             end
         end
     end
-end
-end
-
-
-function p1 = iterateC(p0,n)
-% discrete Euler simulations
-global discC
-for j = 1:n
-    p1=discC*p0;
-p0 = p1;
 end
 end
